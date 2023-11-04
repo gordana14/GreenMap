@@ -6,14 +6,20 @@ from surprise import SVD, Reader, Dataset
 
 
 def get_city_df_recommendation(city_id, n):
+
     """
      Collaborative Filtering with Surprise Library: Extract features and use Cosine Similarity as the similarity metric
+
+     Args:
+        city_id (int) : Id of the city from data set
+        n (int) : number of recommendation to return
+
     """
 
-    data = pd.read_csv("Tree_for_model_test2.csv")
+    data = pd.read_csv("Tree_for_model_test2.csv")  ## Add data set here
 
     tfdif = TfidfVectorizer(stop_words='english')
-    tfdif_matrix = tfdif.fit_transform(data['TreeName']) #city name and tree name return same value
+    tfdif_matrix = tfdif.fit_transform(data['TreeName']) #chose which column to be used to calcualte simmetry 
     cos_sim_matrix = cosine_similarity(tfdif_matrix,tfdif_matrix)
 
     city_trees = data[data['IDCity'] == city_id]
@@ -43,15 +49,19 @@ def get_city_cf_recommendation(city_id, n):
 
     """
      Content-Based Filtering with Scikit-Learn : Use the SVD algorithm to perform Collaborative Filtering
+
+    Args:
+        city_id (int) : Id of the city from data set
+        n (int) : number of recommendation to return
     """
 
-    old_data = pd.read_csv("Tree_for_model_test2.csv")
+    old_data = pd.read_csv("tree_for_model_test.csv") # add data set here
 
     city_trees = old_data[old_data['IDCity'] == city_id]
 
     reader = Reader(rating_scale=(1,4))
 
-    new_data = Dataset.load_from_df(city_trees[['IDCity','IDTreeSpecies','Suggested_Frequency_of_Planting']],reader)
+    new_data = Dataset.load_from_df(city_trees[['IDCity','IDTreeSpecies','Suggested_Frequency_of_Planting']],reader) # ranking used based on suggested frequency of planting
 
     algo = SVD()
 
@@ -83,13 +93,18 @@ def get_city_cf_recommendation(city_id, n):
 
 
 def get_city_hybrid_recommendation(city_id, n):
+
     """
     Hybrid Filtering Model: Vombine collaborative Filtering and Content-Based Filtering
+
+    Args:
+        city_id (int) : Id of the city from data set
+        n (int) : number of recommendation to return
     """
 
-    first_recommendation : pd.DataFrame = get_city_cf_recommendation(city_id, n*2)
+    first_recommendation : pd.DataFrame = get_city_cf_recommendation(city_id, n*2) #collaborative Filtering
 
-    second_recommendation : pd.DataFrame = get_city_df_recommendation(city_id, n*2)
+    second_recommendation : pd.DataFrame = get_city_df_recommendation(city_id, n*2) # Content-Based Filtering
 
     hybrid = pd.concat([first_recommendation,second_recommendation]).groupby(['TreeName'])['TreeName'].count().reset_index(name='count').sort_values(['count'],ascending=False)
 
