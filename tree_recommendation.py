@@ -3,9 +3,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from surprise import SVD, Reader, Dataset
 
+import numpy as np
 
-
-def get_city_df_recommendation(city_id, n):
+def get_city_df_recommendation(city_id, n, data):
 
     """
      Collaborative Filtering with Surprise Library: Extract features and use Cosine Similarity as the similarity metric
@@ -16,10 +16,10 @@ def get_city_df_recommendation(city_id, n):
 
     """
 
-    data = pd.read_csv("Tree_for_model_test2.csv")  ## Add data set here
+    #data = pd.read_csv("Tree_for_model_test2.csv")  ## Add data set here
 
     tfdif = TfidfVectorizer(stop_words='english')
-    tfdif_matrix = tfdif.fit_transform(data['TreeName']) #chose which column to be used to calcualte simmetry 
+    tfdif_matrix = tfdif.fit_transform(data['Family']) #chose which column to be used to calcualte simmetry 
     cos_sim_matrix = cosine_similarity(tfdif_matrix,tfdif_matrix)
 
     city_trees = data[data['IDCity'] == city_id]
@@ -43,9 +43,9 @@ def get_city_df_recommendation(city_id, n):
     top = n_trees.head(n)
     tail = n_trees.tail(n)
 
-    return top['TreeName'], tail['TreeName']
+    return top['TreeName'], tail['TreeName'], n_trees
 
-def get_city_cf_recommendation(city_id, n):
+def get_city_cf_recommendation(city_id, n, data):
 
     """
      Content-Based Filtering with Scikit-Learn : Use the SVD algorithm to perform Collaborative Filtering
@@ -55,13 +55,13 @@ def get_city_cf_recommendation(city_id, n):
         n (int) : number of recommendation to return
     """
 
-    old_data = pd.read_csv("tree_for_model_test.csv") # add data set here
+    old_data = data #pd.read_csv("tree_for_model_test.csv") # add data set here
 
     city_trees = old_data[old_data['IDCity'] == city_id]
 
-    reader = Reader(rating_scale=(1,4))
+    reader = Reader(rating_scale=(0,129))
 
-    new_data = Dataset.load_from_df(city_trees[['IDCity','IDTreeSpecies','Suggested_Frequency_of_Planting']],reader) # ranking used based on suggested frequency of planting
+    new_data = Dataset.load_from_df(city_trees[['IDCity','IDTreeSpecies','Rating']],reader) # ranking used based on suggested frequency of planting
 
     algo = SVD()
 
@@ -89,10 +89,10 @@ def get_city_cf_recommendation(city_id, n):
     bottom_n_trees_id = [x[0] for x in bottom_n_predictions]
     bottom_n_trees = old_data[old_data['IDTreeSpecies'].isin(bottom_n_trees_id)]
 
-    return top_n_trees,  bottom_n_trees
+    return top_n_trees,  bottom_n_trees , n_predicitons
 
 
-def get_city_hybrid_recommendation(city_id, n):
+def get_city_hybrid_recommendation(city_id, n, data):
 
     """
     Hybrid Filtering Model: Vombine collaborative Filtering and Content-Based Filtering
@@ -102,9 +102,9 @@ def get_city_hybrid_recommendation(city_id, n):
         n (int) : number of recommendation to return
     """
 
-    first_recommendation : pd.DataFrame = get_city_cf_recommendation(city_id, n*2) #collaborative Filtering
+    first_recommendation : pd.DataFrame = get_city_cf_recommendation(city_id, n*2, data) #collaborative Filtering
 
-    second_recommendation : pd.DataFrame = get_city_df_recommendation(city_id, n*2) # Content-Based Filtering
+    second_recommendation : pd.DataFrame = get_city_df_recommendation(city_id, n*2, data) # Content-Based Filtering
 
     hybrid = pd.concat([first_recommendation,second_recommendation]).groupby(['TreeName'])['TreeName'].count().reset_index(name='count').sort_values(['count'],ascending=False)
 
@@ -112,3 +112,37 @@ def get_city_hybrid_recommendation(city_id, n):
     hybrid_bottom = hybrid.tail(n)
 
     return hybrid_top, hybrid_bottom
+
+if __name__ == '__main__':
+    df= pd.read_csv("C://Users/Goga/Documents/GitHub/GreenMap/Tree_for_model_test.csv")
+    #check null
+    df['Uses'].isnull().sum()
+    df.isnull().sum().sum()
+    df.loc[df['Uses'].isnull()]
+    df['Uses'] = df['Uses'].replace(np.nan, 'NotAvailable')
+    df['Suggested_Frequency_of_Planting'] = df['Suggested_Frequency_of_Planting'].replace(np.nan, 'NotAvailable')
+    df.fillna('NotAvailable')
+    #encoding
+    df['Suggested_Frequency_of_Planting']= df['Suggested_Frequency_of_Planting'].map({'NotAvailable':1, 'Sparingly':2,'Moderately':3, 'Frequently':4})
+    df['Rating'] =  np.ceil ((df['Suggested_Frequency_of_Planting'] * df['Tree_number_city'])/df['area'] )
+    #p = df.groupby('Rating')['Rating'].agg(['count'])
+    #first_recommendation
+    res1= get_city_df_recommendation(1, 10, df)
+    #print(res1)
+    #second recc
+    res2 = get_city_df_recommendation(1, 10, df)
+    #third recc
+    #res3 = get_city_hybrid_recommendation(1, 10, df)
+    data=[]
+    f1 = 'C://Users/Goga/Documents/GitHub/GreenMap/Extanded.csv'
+    try:
+        for index, row  in res2[2].iterrows():
+            data.append({'IDTreeSpecies': row['IDTreeSpecies'], 'TreeName':row['TreeName']})
+        file_export = pd.DataFrame(data)
+        file_export.to_csv(f1, index=False) 
+    except:
+        print("An exception occurred")
+    
+    
+    
+    
