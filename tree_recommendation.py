@@ -6,6 +6,9 @@ from surprise import SVD, Reader, Dataset
 
 
 def get_city_df_recommendation(city_id, n):
+    """
+     Collaborative Filtering with Surprise Library: Extract features and use Cosine Similarity as the similarity metric
+    """
 
     data = pd.read_csv("Tree_for_model_test2.csv")
 
@@ -37,6 +40,10 @@ def get_city_df_recommendation(city_id, n):
     return top['TreeName'], tail['TreeName']
 
 def get_city_cf_recommendation(city_id, n):
+
+    """
+     Content-Based Filtering with Scikit-Learn : Use the SVD algorithm to perform Collaborative Filtering
+    """
 
     old_data = pd.read_csv("Tree_for_model_test2.csv")
 
@@ -76,6 +83,9 @@ def get_city_cf_recommendation(city_id, n):
 
 
 def get_city_hybrid_recommendation(city_id, n):
+    """
+    Hybrid Filtering Model: Vombine collaborative Filtering and Content-Based Filtering
+    """
 
     first_recommendation : pd.DataFrame = get_city_cf_recommendation(city_id, n*2)
 
