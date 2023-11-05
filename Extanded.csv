@@ -1,13 +1,61 @@
 IDTreeSpecies,TreeName,IDCity,CityName
+2,Aesculus hippocastanum,1,Berlin
 98,Acer pseudoplatanus ,1,Berlin
-226,Sophora japonica ,1,Berlin
-218,Robinia pseudoacacia ,1,Berlin
-110,Ailanthus altissima ,1,Berlin
 112,Betula pendula ,1,Berlin
-191,Populus nigra ,1,Berlin
-187,Populus alba ,2,Paris
-7,Corylus colurna,2,Paris
-57,Acer campestre,2,Paris
-248,Ulmus minor ,2,Paris
+46,Carpinus betulus,1,Berlin
+39,Tilia tomentosa,1,Berlin
+38,Tilia cordata,1,Berlin
+31,Quercus rubra,1,Berlin
+218,Robinia pseudoacacia ,1,Berlin
+7,Corylus colurna,1,Berlin
+93,Acer platanoides ,1,Berlin
+2,Aesculus hippocastanum,2,Paris
 38,Tilia cordata,2,Paris
-10,Ginkgo biloba,2,Paris
+226,Sophora japonica ,2,Paris
+218,Robinia pseudoacacia ,2,Paris
+93,Acer platanoides ,2,Paris
+46,Carpinus betulus,2,Paris
+39,Tilia tomentosa,2,Paris
+98,Acer pseudoplatanus ,2,Paris
+7,Corylus colurna,2,Paris
+38,Tilia cordata ,2,Paris
+2,Aesculus hippocastanum,3,Madrid
+2,Aesculus hippocastanum ,3,Madrid
+226,Sophora japonica ,3,Madrid
+218,Robinia pseudoacacia ,3,Madrid
+201,Prunus avium ,3,Madrid
+192,Populus nigra 'Italica' ,3,Madrid
+191,Populus nigra ,3,Madrid
+175,Pinus nigra ,3,Madrid
+141,Fraxinus excelsior ,3,Madrid
+121,Celtis australis ,3,Madrid
+2,Aesculus hippocastanum,4,Stockholm
+2,Aesculus hippocastanum ,4,Stockholm
+226,Sophora japonica ,4,Stockholm
+218,Robinia pseudoacacia ,4,Stockholm
+201,Prunus avium ,4,Stockholm
+192,Populus nigra 'Italica' ,4,Stockholm
+191,Populus nigra ,4,Stockholm
+175,Pinus nigra ,4,Stockholm
+141,Fraxinus excelsior ,4,Stockholm
+121,Celtis australis ,4,Stockholm
+2,Aesculus hippocastanum,5,Copenhagen
+38,Tilia cordata,5,Copenhagen
+218,Robinia pseudoacacia ,5,Copenhagen
+201,Prunus avium ,5,Copenhagen
+191,Populus nigra ,5,Copenhagen
+112,Betula pendula ,5,Copenhagen
+98,Acer pseudoplatanus ,5,Copenhagen
+46,Carpinus betulus,5,Copenhagen
+93,Acer platanoides ,5,Copenhagen
+31,Quercus rubra,5,Copenhagen
+2,Aesculus hippocastanum,6,Vienna
+38,Tilia cordata,6,Vienna
+226,Sophora japonica ,6,Vienna
+218,Robinia pseudoacacia ,6,Vienna
+191,Populus nigra ,6,Vienna
+187,Populus alba ,6,Vienna
+110,Ailanthus altissima ,6,Vienna
+93,Acer platanoides ,6,Vienna
+98,Acer pseudoplatanus ,6,Vienna
+31,Quercus rubra,6,Vienna

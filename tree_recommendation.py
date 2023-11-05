@@ -134,31 +134,31 @@ if __name__ == '__main__':
 
     #p = df.groupby('Rating')['Rating'].agg(['count'])
     #first_recommendation
-    res1_introduce, res1_reduce= get_city_df_recommendation(1, 10, df)
-    res1_introduce = list(zip(res1_introduce.IDTreeSpecies,res1_introduce.TreeName))
-    res1_reduce = list(zip(res1_reduce.IDTreeSpecies,res1_reduce.TreeName))
+    # res1_introduce, res1_reduce= get_city_df_recommendation(1, 10, df)
+    # res1_introduce = list(zip(res1_introduce.IDTreeSpecies,res1_introduce.TreeName))
+    # res1_reduce = list(zip(res1_reduce.IDTreeSpecies,res1_reduce.TreeName))
 
-    # #second recc
-    res2_introduce, res2_reduce = get_city_cf_recommendation(1, 10, df)
-    res2_introduce = list(zip(res2_introduce.IDTreeSpecies,res2_introduce.TreeName))
-    res2_reduce = list(zip(res2_reduce.IDTreeSpecies,res2_reduce.TreeName))
+    # # #second recc
+    # res2_introduce, res2_reduce = get_city_cf_recommendation(1, 10, df)
+    # res2_introduce = list(zip(res2_introduce.IDTreeSpecies,res2_introduce.TreeName))
+    # res2_reduce = list(zip(res2_reduce.IDTreeSpecies,res2_reduce.TreeName))
 
-    #third recc
-    res3_introduce, res3_reduce = get_city_hybrid_recommendation(1, 10, df)
-    res3_introduce = list(zip(res3_introduce.IDTreeSpecies,res3_introduce.TreeName))
-    res3_reduce = list(zip(res3_reduce.IDTreeSpecies,res3_reduce.TreeName))
+    # #third recc
+    # res3_introduce, res3_reduce = get_city_hybrid_recommendation(1, 10, df)
+    # res3_introduce = list(zip(res3_introduce.IDTreeSpecies,res3_introduce.TreeName))
+    # res3_reduce = list(zip(res3_reduce.IDTreeSpecies,res3_reduce.TreeName))
 
-    # print(res3)
+    # # print(res3)
 
-    #print(res2)
-    print("------------------Introduce Tree---------------------")
-    print("\t similarty matrix \t\t ratig svd \t\t\t hybrid")
-    for x,y,z in zip(res1_introduce,res2_introduce, res3_introduce):
-         print(f"\t {x} \t {y} \t{z}")
-    print("------------------Not recommended Tree---------------------")
-    print("\t similarty matrix \t\t ratig svd \t\t\t hybrid")
-    for x,y,z in zip(res1_reduce,res2_reduce, res3_reduce):
-        print(f"\t {x} \t {y} \t{z}")
+    # #print(res2)
+    # print("------------------Introduce Tree---------------------")
+    # print("\t similarty matrix \t\t ratig svd \t\t\t hybrid")
+    # for x,y,z in zip(res1_introduce,res2_introduce, res3_introduce):
+    #      print(f"\t {x} \t {y} \t{z}")
+    # print("------------------Not recommended Tree---------------------")
+    # print("\t similarty matrix \t\t ratig svd \t\t\t hybrid")
+    # for x,y,z in zip(res1_reduce,res2_reduce, res3_reduce):
+    #     print(f"\t {x} \t {y} \t{z}")
 
     #third recc
 
@@ -178,8 +178,11 @@ if __name__ == '__main__':
     #res2 = get_city_df_recommendation(1, 10, df)
     #third recc
     #res3 = get_city_hybrid_recommendation(1, 10, df)
-    #data=[]
-    #f1 = 'C://Users/Goga/Documents/GitHub/GreenMap/Extanded.csv'
+
+    data1=[]
+    data2 = []
+    f1 = 'Extanded.csv'
+    f2 = 'Reduce.csv'
     # try:
     #     for index, row  in res2[2].iterrows():
     #         data.append({'IDTreeSpecies': row['IDTreeSpecies'], 'TreeName':row['TreeName']})
@@ -187,7 +190,16 @@ if __name__ == '__main__':
     #     file_export.to_csv(f1, index=False) 
     # except:
     #     print("An exception occurred")
+    city_id = {1:'Berlin', 2:'Paris', 3: 'Madrid', 4: 'Stockholm', 5: 'Copenhagen', 6: 'Vienna'}
     
-    
-    
+    for i in range(1,7):
+        res1_introduce, res1_reduce= get_city_hybrid_recommendation(i, 10, df)
+        for index, row  in res1_introduce.iterrows():
+            data1.append({'IDTreeSpecies': row['IDTreeSpecies'], 'TreeName':row['TreeName'], 'IDCity': i, 'CityName': city_id[i]})
+        for index, row  in res1_reduce.iterrows():
+            data2.append({'IDTreeSpecies': row['IDTreeSpecies'], 'TreeName':row['TreeName'], 'IDCity': i, 'CityName': city_id[i]})
+        file_export1 = pd.DataFrame(data1)
+        file_export1.to_csv(f1, index=False) 
+        file_export2 = pd.DataFrame(data2)
+        file_export2.to_csv(f2, index=False)  
     

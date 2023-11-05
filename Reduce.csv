@@ -1,0 +1,61 @@
+IDTreeSpecies,TreeName,IDCity,CityName
+6,Cercidiphyllum japonicum ,1,Berlin
+194,Populus simonii 'Fastigiata' ,1,Berlin
+143,Fraxinus excelsior 'Pendula' ,1,Berlin
+166,Paulownia tomentosa,1,Berlin
+168,Picea omorika,1,Berlin
+168,Picea omorika ,1,Berlin
+187,Populus alba,1,Berlin
+189,Populus alba 'Raket' ,1,Berlin
+190,Populus balsamifera,1,Berlin
+195,Populus spec. ,1,Berlin
+6,Cercidiphyllum japonicum ,2,Paris
+19,Quercus alba,2,Paris
+139,Fraxinus americana ,2,Paris
+140,Fraxinus angustifolia,2,Paris
+156,Juglans regia,2,Paris
+165,Morus alba,2,Paris
+181,Pinus wallichiana,2,Paris
+181,Pinus wallichiana ,2,Paris
+187,Populus alba,2,Paris
+189,Populus alba 'Raket' ,2,Paris
+6,Cercidiphyllum japonicum ,3,Madrid
+50,Koelreuteria paniculata ,3,Madrid
+230,Sorbus torminalis,3,Madrid
+211,Pyrus communis,3,Madrid
+208,Pterocarya fraxinifolia,3,Madrid
+203,Prunus padus,3,Madrid
+170,Picea pungens,3,Madrid
+165,Morus alba,3,Madrid
+160,Larix decidua,3,Madrid
+156,Juglans regia,3,Madrid
+6,Cercidiphyllum japonicum ,4,Stockholm
+21,Quercus coccinea,4,Stockholm
+230,Sorbus torminalis ,4,Stockholm
+230,Sorbus torminalis,4,Stockholm
+225,Sequoiadendron giganteum,4,Stockholm
+208,Pterocarya fraxinifolia,4,Stockholm
+203,Prunus padus,4,Stockholm
+168,Picea omorika ,4,Stockholm
+168,Picea omorika,4,Stockholm
+165,Morus alba,4,Stockholm
+6,Cercidiphyllum japonicum ,5,Copenhagen
+212,Quercus cerris,5,Copenhagen
+189,Populus alba 'Raket' ,5,Copenhagen
+190,Populus balsamifera,5,Copenhagen
+199,Populus x canadensis 'Regenerata' ,5,Copenhagen
+203,Prunus padus,5,Copenhagen
+203,Prunus padus ,5,Copenhagen
+208,Pterocarya fraxinifolia,5,Copenhagen
+209,Pterocarya spec. ,5,Copenhagen
+214,Quercus pubescens,5,Copenhagen
+206,Pseudotsuga menziesii,6,Vienna
+5,Celtis occidentalis,6,Vienna
+195,Populus spec. ,6,Vienna
+156,Juglans regia,6,Vienna
+168,Picea omorika,6,Vienna
+168,Picea omorika ,6,Vienna
+171,Picea pungens 'Glauca' ,6,Vienna
+187,Populus alba,6,Vienna
+189,Populus alba 'Raket' ,6,Vienna
+190,Populus balsamifera,6,Vienna
