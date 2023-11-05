@@ -171,6 +171,22 @@ if __name__ == '__main__':
     #     file_export.to_csv(f1, index=False) 
     # except:
     #     print("An exception occurred")
+
+    #res1= get_city_df_recommendation(1, 10, df)
+    #print(res1)
+    #second recc
+    #res2 = get_city_df_recommendation(1, 10, df)
+    #third recc
+    #res3 = get_city_hybrid_recommendation(1, 10, df)
+    #data=[]
+    #f1 = 'C://Users/Goga/Documents/GitHub/GreenMap/Extanded.csv'
+    # try:
+    #     for index, row  in res2[2].iterrows():
+    #         data.append({'IDTreeSpecies': row['IDTreeSpecies'], 'TreeName':row['TreeName']})
+    #     file_export = pd.DataFrame(data)
+    #     file_export.to_csv(f1, index=False) 
+    # except:
+    #     print("An exception occurred")
     
     
     
